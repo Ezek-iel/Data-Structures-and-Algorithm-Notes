@@ -1,29 +1,32 @@
-//@ts-check
+// @ts-check
 
 /**
+ * A function to search a number in a list using binary search returns one if not found
  * @param {Array<number>} elements
  * @param {number} target
- * @returns {number | undefined}
- * Finds the position of the first occurenct of target in elements
+ * @returns {number}
  */
-function binarySearch(elements, target) {
+function binarySearch(elements, target){
     let leftPointer = 0
-    let rightPointer = elements.length - 1
+    let rightPointer = elements.length
 
-
-    while (leftPointer <= rightPointer) {
-        let middlePosition = Math.floor((leftPointer + rightPointer) / 2)
-        let middleElement = elements[middlePosition]
-        if (target == middleElement) {
-            return middlePosition
+    while (leftPointer <= rightPointer){
+        let midpoint = Math.floor((leftPointer + rightPointer) / 2)
+        let guess = elements[midpoint]
+        if (target == guess){
+            return midpoint
         }
-        if (middleElement > target) {
-            rightPointer = middlePosition - 1
+        else if (guess < target){
+            leftPointer  =  midpoint + 1
         }
         else {
-            leftPointer = middlePosition + 1
+            rightPointer  = midpoint - 1
         }
     }
+    return -1
 }
 
-console.log(binarySearch([1, 2, 3, 4, 5], 2))
+console.log(binarySearch([1,2,3,4,5], 2))
+console.log(binarySearch([1,2,3,4,5], 5))
+console.log(binarySearch([1,2,3,4,5], 1))
+console.log(binarySearch([1,2,3,4,5], 6))
